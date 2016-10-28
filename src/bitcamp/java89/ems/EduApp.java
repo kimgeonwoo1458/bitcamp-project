@@ -1,7 +1,7 @@
 // 주제: 사용자 정의 타입의 인스턴스 - 응용 III
 // => 메서드를 이용하여 객체를 생성한다.
 
-package bitcapm.java89.ems;
+package bitcamp.java89.ems;
 import java.util.Scanner;
 
 public class EduApp {
@@ -10,7 +10,7 @@ public class EduApp {
 
 
   public static void main(String[] args) {
-    Lecturecontroller.keyscan = keyscan;
+    Lecturecontroller lecturecontroller = new Lecturecontroller(keyscan);
     System.out.println("비트캠프에오신것을 환영합니다.");
 
     loop:
@@ -21,9 +21,11 @@ public class EduApp {
       String command = keyscan.nextLine().toLowerCase();
 
       switch (command) {
-        case "add": Lecturecontroller.doAdd(); break;
-        case "list": Lecturecontroller.doList(); break;
-        case "view": Lecturecontroller.doView(); break;
+        case "add": lecturecontroller.doAdd(); break;
+        case "list": lecturecontroller.doList(); break;
+        case "view": lecturecontroller.doView(); break;
+        case "delete": lecturecontroller.doDelete(); break;
+        case "update": lecturecontroller.doUpdate(); break;
         case "quit":
           System.out.println("good bye!");
           break loop;

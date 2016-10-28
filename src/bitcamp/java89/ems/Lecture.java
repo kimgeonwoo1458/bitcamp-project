@@ -1,5 +1,5 @@
 
-package bitcapm.java89.ems;
+package bitcamp.java89.ems;
 
   public class Lecture {
     String name;

@@ -1,19 +1,23 @@
 // 주제: 사용자 정의 타입의 인스턴스 - 응용 III
 // => 메서드를 이용하여 객체를 생성한다.
 
-package bitcapm.java89.ems;
+package bitcamp.java89.ems;
 import java.util.Scanner;
 
 public class Lecturecontroller {
 
-  static Lecture[] lectures = new Lecture[100];
-  static int length = 0;
-  static Scanner keyscan;
+  Lecture[] lectures = new Lecture[100];
+  int length = 0;
+  Scanner keyscan;
 
-  static void doList(){
+  public Lecturecontroller(Scanner keyscan){
+    this.keyscan = keyscan;
+  }
+
+  public void doList(){
     Lecture lecture = null;
-    for(int i = 0; i < length; i++){
-      lecture = lectures[i];
+    for(int i = 0; i < this.length; i++){
+      lecture = this.lectures[i];
       System.out.printf("%s, %s, %s, %s, %d, %d, %d, %d \n",
       lecture.name,
       lecture.teacher,
@@ -25,53 +29,108 @@ public class Lecturecontroller {
       lecture.code);
   }
 }
-  static void doAdd(){
-    while (length < lectures.length){
+  public void doAdd(){
+    while (length < this.lectures.length){
       Lecture lecture = new Lecture();
 
       System.out.print("강의이름(예:김건우) : ");
-      lecture.name = keyscan.nextLine();
+      lecture.name = this.keyscan.nextLine();
       System.out.print("강사(예:엄진영) : ");
-      lecture.teacher = keyscan.nextLine();
+      lecture.teacher = this.keyscan.nextLine();
       System.out.print("교재(예:자바프로그래밍) : ");
-      lecture.book = keyscan.nextLine();
+      lecture.book = this.keyscan.nextLine();
       System.out.print("강의시간(예:60분) : ");
-      lecture.time = keyscan.nextLine();
+      lecture.time = this.keyscan.nextLine();
       System.out.print("강의비용(예:120000) : ");
-      lecture.cost =Integer.parseInt(keyscan.nextLine());
+      lecture.cost =Integer.parseInt(this.keyscan.nextLine());
       System.out.print("강의시작날짜(예:161011) : ");
-      lecture.sta =Integer.parseInt(keyscan.nextLine());
+      lecture.sta =Integer.parseInt(this.keyscan.nextLine());
       System.out.print("강의종료날짜(예:170328) : ");
-      lecture.fin =Integer.parseInt(keyscan.nextLine());
+      lecture.fin =Integer.parseInt(this.keyscan.nextLine());
       System.out.print("강의코드(예:123486) : ");
-      lecture.code =Integer.parseInt(keyscan.nextLine());
+      lecture.code =Integer.parseInt(this.keyscan.nextLine());
 
 
-      lectures[length++] = lecture;
+      this.lectures[length++] = lecture;
       System.out.print("계속입력하시겠습니까?(y/n)? ");
-      if(!keyscan.nextLine().equals("y"))
+      if(!this.keyscan.nextLine().equals("y"))
       break;
     }
   }
-  static void doView(){
+  public void doView(){
   System.out.print("조회할 강의는?");
-  String name = keyscan.nextLine().toLowerCase();
-  for(int i = 0; i < length; i++){
-    if (lectures[i].name.toLowerCase().equals(name)){
-      System.out.printf("강의이름 : %s\n",lectures[i].name);
-      System.out.printf("강사 : %s\n",lectures[i].teacher);
-      System.out.printf("교재 : %s\n",lectures[i].book);
-      System.out.printf("강의시간 : %s\n",lectures[i].time);
-      System.out.printf("강의비용 : %d\n",lectures[i].cost);
-      System.out.printf("강의시작날짜 : %d\n",lectures[i].sta);
-      System.out.printf("강의종료날짜 : %d\n",lectures[i].fin);
-      System.out.printf("강의코드 : %d\n",lectures[i].code);
+  String name = this.keyscan.nextLine().toLowerCase();
+  for(int i = 0; i < this.length; i++){
+    if (this.lectures[i].name.toLowerCase().equals(name)){
+      System.out.printf("강의이름 : %s\n", this.lectures[i].name);
+      System.out.printf("강사 : %s\n", this.lectures[i].teacher);
+      System.out.printf("교재 : %s\n", this.lectures[i].book);
+      System.out.printf("강의시간 : %s\n", this.lectures[i].time);
+      System.out.printf("강의비용 : %d\n", this.lectures[i].cost);
+      System.out.printf("강의시작날짜 : %d\n", this.lectures[i].sta);
+      System.out.printf("강의종료날짜 : %d\n", this.lectures[i].fin);
+      System.out.printf("강의코드 : %d\n", this.lectures[i].code);
       break;
       }
     }
   }
-}
+  public void doDelete() {
+  System.out.print("삭제할 강의는? ");
+  String name = this.keyscan.nextLine().toLowerCase();
 
+  for (int i = 0; i < this.length; i++) {
+    if (this.lectures[i].name.toLowerCase().equals(name)) {
+      for (int x = i + 1; x < this.length; x++, i++) {
+        this.lectures[i] = this.lectures[x];
+      }
+      this.lectures[--length] = null;
+
+      System.out.printf("%s 강의를 삭제하였습니다.\n", name);
+      return; // 함수 실행을 종료한다.
+    }
+  }
+  System.out.printf("%s 학생이 없습니다.\n", name);
+}
+public void doUpdate() {
+  System.out.print("변경할 강의는?");
+  String name = this.keyscan.nextLine().toLowerCase();
+
+  for(int i = 0; i < this.length; i++){
+    if (this.lectures[i].name.toLowerCase().equals(name)){
+      Lecture lec = new Lecture();
+      System.out.print("강의이름(예:김건우) : ");
+      lec.name = this.keyscan.nextLine();
+      System.out.print("강사(예:엄진영) : ");
+      lec.teacher = this.keyscan.nextLine();
+      System.out.print("교재(예:자바프로그래밍) : ");
+      lec.book = this.keyscan.nextLine();
+      System.out.print("강의시간(예:60분) : ");
+      lec.time = this.keyscan.nextLine();
+      System.out.print("강의비용(예:120000) : ");
+      lec.cost =Integer.parseInt(this.keyscan.nextLine());
+      System.out.print("강의시작날짜(예:161011) : ");
+      lec.sta =Integer.parseInt(this.keyscan.nextLine());
+      System.out.print("강의종료날짜(예:170328) : ");
+      lec.fin =Integer.parseInt(this.keyscan.nextLine());
+      System.out.print("강의코드(예:123486) : ");
+      lec.code =Integer.parseInt(this.keyscan.nextLine());
+
+      System.out.print("저장하시겠습니까?(y/n)? ");
+      if(this.keyscan.nextLine().equals("y")){
+      lectures[i] = lec;
+      System.out.print("저장하였습니다.\n");
+      return;
+    } else{
+      System.out.print("취소하였습니다.\n");
+      return;
+
+    }
+      }
+     System.out.printf("%s강의가 없습니다.\n", name);
+     return;
+    }
+  }
+}
 
 
 /*
