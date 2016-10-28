@@ -21,11 +21,9 @@ public class EduApp {
       String command = keyscan.nextLine().toLowerCase();
 
       switch (command) {
-        case "add": lecturecontroller.doAdd(); break;
-        case "list": lecturecontroller.doList(); break;
-        case "view": lecturecontroller.doView(); break;
-        case "delete": lecturecontroller.doDelete(); break;
-        case "update": lecturecontroller.doUpdate(); break;
+        case "menu" : doMenu(); break;
+        case "go 1": lecturecontroller.service(); break;
+
         case "quit":
           System.out.println("good bye!");
           break loop;
@@ -34,6 +32,12 @@ public class EduApp {
 
       }
     }
+  }
+  static void doMenu(){
+    System.out.println("[메뉴]");
+    System.out.println("1. 강의관리");
+    System.out.println("메뉴이동은 'go 메뉴번호'를 입력하세요.");
+
   }
 }
 

@@ -6,15 +6,38 @@ import java.util.Scanner;
 
 public class Lecturecontroller {
 
-  Lecture[] lectures = new Lecture[100];
-  int length = 0;
-  Scanner keyscan;
+  private Lecture[] lectures = new Lecture[100];
+  private int length = 0;
+  private Scanner keyscan;
 
   public Lecturecontroller(Scanner keyscan){
     this.keyscan = keyscan;
   }
 
-  public void doList(){
+  public void service(){
+    loop:
+    while (true){
+      System.out.println("------------------------------");
+      System.out.print("강의관리>");
+
+      String command = keyscan.nextLine().toLowerCase();
+
+      switch (command) {
+        case "add": this.doAdd(); break;
+        case "list": this.doList(); break;
+        case "view": this.doView(); break;
+        case "delete": this.doDelete(); break;
+        case "update": this.doUpdate(); break;
+        case "main":
+          break loop;
+          default:
+          System.out.println("지원하지않는 명령어입니다.");
+
+      }
+    }
+  }
+
+  private void doList(){
     Lecture lecture = null;
     for(int i = 0; i < this.length; i++){
       lecture = this.lectures[i];
@@ -29,7 +52,7 @@ public class Lecturecontroller {
       lecture.code);
   }
 }
-  public void doAdd(){
+  private void doAdd(){
     while (length < this.lectures.length){
       Lecture lecture = new Lecture();
 
@@ -57,7 +80,7 @@ public class Lecturecontroller {
       break;
     }
   }
-  public void doView(){
+  private void doView(){
   System.out.print("조회할 강의는?");
   String name = this.keyscan.nextLine().toLowerCase();
   for(int i = 0; i < this.length; i++){
@@ -74,7 +97,7 @@ public class Lecturecontroller {
       }
     }
   }
-  public void doDelete() {
+  private void doDelete() {
   System.out.print("삭제할 강의는? ");
   String name = this.keyscan.nextLine().toLowerCase();
 
@@ -91,7 +114,7 @@ public class Lecturecontroller {
   }
   System.out.printf("%s 학생이 없습니다.\n", name);
 }
-public void doUpdate() {
+private void doUpdate() {
   System.out.print("변경할 강의는?");
   String name = this.keyscan.nextLine().toLowerCase();
 
